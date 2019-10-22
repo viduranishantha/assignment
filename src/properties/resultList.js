@@ -1,26 +1,71 @@
 import React, { Component } from "react";
 import ResultData from "../data/result.json";
+import SavedData from "../data/savedProperties.json";
+import Card from "./card";
 
 class ResultList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ResultData,
+      SavedData
+    };
+    // console.log(this.state);
+  }
+
+  // componentDidMount() {
+  //   const prpertyArray;
+  //   const data = ResultData;
+  //   // this.setState({ house: data.results[0], loading: false });
+  //   console.log(data);
+  //   this.setState((prpertyArray = data));
+  // }
+
+  DelProperty = (index, e) => {
+    // const newItem = SavedtData;
+    // console.log(this);
+
+    // const savedProperty = Object.assign([], this.state.SavedtData);
+    // savedProperty.splice(index, 1);
+
+    const property = Object.assign([], this.state.ResultData);
+
+    property.splice(index, 1);
+    this.setState({ ResultData: property });
+
+    // const saved = Object.assign([], this.state.SavedtData);
+    // property.splice(index, 1);
+    // this.setState({ ResultData: property });
+  };
+
+  AddProperty = propertyId => {
+    // const property = Object.assign([], this.state.ResultData);
+    // const index = this.state.ResultData.findIndex(property => {
+    //   return property.id === propertyId;
+    // });
+    const activeProperty = this.state.ResultData[propertyId];
+    const resultArray = [...this.state.SavedData];
+    const newArray = [];
+    console.log(newArray);
+
+    console.log(activeProperty.concat(resultArray));
+  };
+
   render() {
     return (
       <div>
-        {ResultData.map((PropertyDetail, index) => {
+        {this.state.ResultData.map((PropertyItem, index) => {
           return (
-            <div className="card">
-              <div className="logo">
-                <img
-                  src={PropertyDetail.agency.brandingColors.primary}
-                  width="80px"
-                  height="30px"
-                  alt="property"
-                />
-              </div>
-              <div className="main-image">
-                <img src={PropertyDetail.mainImage} alt="property" />
-              </div>
-              <div className="price">{PropertyDetail.price}</div>
-            </div>
+            <Card
+              key={PropertyItem.id}
+              propertyId={PropertyItem.id}
+              logoBgColor={PropertyItem.agency.brandingColors.primary}
+              mainImage={PropertyItem.mainImage}
+              logo={PropertyItem.agency.logo}
+              price={PropertyItem.price}
+              addEvent={this.AddProperty}
+              delEvent={this.DelProperty.bind(this, index)}
+            />
           );
         })}
       </div>
