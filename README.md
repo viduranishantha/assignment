@@ -1,13 +1,15 @@
-This app demonstrate remove properties from result list to the saved list and back and forth.
+This app demonstrate removing properties from result list to the saved list and back and forth.
 *Have used Googel fonts for the custom fonts.
-*Initial property data load form the data.json file.
+*Initial property data load form the data.json file in the data folder.
 *Card.js render the single card layout
 *PropertyListContainer.js will render main two list containers.This file load the json data from the data file.
-\*RenderBustton.js file will conditinally render the relavent button to add or remove the property
 
-Funtionlity============
+# Funtionlity
+
 *Mouse over a property item then it will display add or remvoe button.
-*Click on the buttons and check the funtionlity.
+*Click on the buttons and it will show relavent action.
+
+# To clone and run this project on a local please follow the step below.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
