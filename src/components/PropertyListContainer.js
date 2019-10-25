@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropertyData from "../data/data.json";
 import Card from "./card";
+import Logo from "../logo.jpg";
 
 class PropertyListContainer extends Component {
   constructor(props) {
@@ -9,12 +10,10 @@ class PropertyListContainer extends Component {
       results: PropertyData.results,
       saved: PropertyData.saved
     };
-    // console.log(this.state);
   }
 
-  //   AddProperty = propertyId => {};
   AddProperty = (index, e) => {
-    const activeIndex = index - 1;
+    const activeIndex = index;
     const activeProperty = [this.state.results[activeIndex]];
     const saved = this.state.saved;
     const mergeList = [...saved, ...activeProperty];
@@ -22,17 +21,25 @@ class PropertyListContainer extends Component {
     const results = Object.assign([], this.state.results);
     results.splice(activeIndex, 1);
     this.setState({ results: results });
-    console.log(activeIndex);
   };
 
-  DelProperty = (index, pid) => {
+  DelProperty = (index, p) => {
     console.log(index);
+    const activeProperty = [this.state.saved[index]];
+    const results = this.state.results;
+    const mergeList = [...results, ...activeProperty];
+    this.setState({ results: mergeList });
+    const saved = Object.assign([], this.state.saved);
+    saved.splice(index, 1);
+    this.setState({ saved: saved });
   };
 
   render() {
     return (
       <div className="main-container">
-        <h1> REA Assignment </h1>
+        <div className="logoContainer">
+          <img src={Logo} alt="Logo" />
+        </div>
         <div className="list-container">
           <div className="result-container">
             <h2> Result </h2>
@@ -40,13 +47,13 @@ class PropertyListContainer extends Component {
               return (
                 <Card
                   key={Property.id}
-                  listType="resultResult"
+                  listType="resultList"
                   propertyId={Property.id}
                   logoBgColor={Property.agency.brandingColors.primary}
                   mainImage={Property.mainImage}
                   logo={Property.agency.logo}
                   price={Property.price}
-                  addEvent={this.AddProperty.bind(index, Property.id)}
+                  addEvent={this.AddProperty.bind(this, index)}
                 />
               );
             })}
@@ -63,7 +70,7 @@ class PropertyListContainer extends Component {
                   mainImage={Property.mainImage}
                   logo={Property.agency.logo}
                   price={Property.price}
-                  delEvent={this.DelProperty.bind(this, Property.id)}
+                  delEvent={this.DelProperty.bind(this, index)}
                 />
               );
             })}

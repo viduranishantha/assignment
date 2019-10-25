@@ -2,16 +2,20 @@ import React, { Component } from "react";
 
 class Card extends Component {
   renderButtons() {
-    // console.log(this.props.listType === savedList);
-
     if (this.props.listType === "savedList")
       return (
-        <button onClick={() => this.props.delEvent(this.props.propertyId)}>
+        <button
+          className="btnRemove"
+          onClick={() => this.props.delEvent(this.props.propertyId)}
+        >
           Remove Property
         </button>
       );
     return (
-      <button onClick={() => this.props.addEvent(this.props.propertyId)}>
+      <button
+        className="btnAdd"
+        onClick={() => this.props.addEvent(this.props.propertyId)}
+      >
         Add Property
       </button>
     );
@@ -30,12 +34,13 @@ class Card extends Component {
     } = this.props;
     return (
       <div className="card">
-        <div className="overlay"></div>
+        <div className="overlay">
+          <div className="buttonContainer">
+            <div className="buttonMiddle">{this.renderButtons()}</div>
+          </div>
+        </div>
         <div className="logo" style={{ backgroundColor: logoBgColor }}>
-          {this.renderButtons()}
-
-          <img src={logo} width="80px" height="30px" alt="property" />
-          <div>{propertyId} </div>
+          <img src={logo} alt="property" />
         </div>
         <div className="main-image">
           <img src={mainImage} alt="property" />
