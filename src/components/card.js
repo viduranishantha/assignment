@@ -4,34 +4,19 @@ class Card extends Component {
   renderButtons() {
     if (this.props.listType === "savedList")
       return (
-        <button
-          className="btnRemove"
-          onClick={() => this.props.delEvent(this.props.propertyId)}
-        >
+        <button className="btnRemove" onClick={() => this.props.delEvent()}>
           Remove Property
         </button>
       );
     return (
-      <button
-        className="btnAdd"
-        onClick={() => this.props.addEvent(this.props.propertyId)}
-      >
+      <button className="btnAdd" onClick={() => this.props.addEvent()}>
         Add Property
       </button>
     );
   }
 
   render() {
-    const {
-      logoBgColor,
-      propertyId,
-      logo,
-      mainImage,
-      price,
-      delEvent,
-      addEvent,
-      listType
-    } = this.props;
+    const { logoBgColor, logo, mainImage, price } = this.props;
     return (
       <div className="card">
         <div className="overlay">
